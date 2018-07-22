@@ -8,17 +8,17 @@ class UserManager(models.Manager):
     def basic_validator_reg(self, postData):
         errors = {}
         if User.objects.filter(email = postData['email']):
-		 	errors['email_present'] = "There is an account already with that email address."
+            errors['email_present'] = "There is an account already with that email address."
         if len(postData['first_name']) < 2 or not postData['first_name'].isalpha():
-			errors['first_name'] = "First name must be no fewer than 2 characters long, and must be alphanumeric."
+            errors['first_name'] = "First name must be no fewer than 2 characters long, and must be alphanumeric."
         if len(postData['last_name']) < 2 or not postData['last_name'].isalpha():
-			errors['last_name'] = "Last name must be no fewer than 2 characters long, and must be alphanumeric."
+            errors['last_name'] = "Last name must be no fewer than 2 characters long, and must be alphanumeric."
         if EMAIL_REGEX.match(postData['email']) == None:
-			errors['email_format'] = "Email address must be in valid email format."
+            errors['email_format'] = "Email address must be in valid email format."
         if len(postData['pword']) < 8:
-			errors['pword_length'] = "Password must be at least 8 characters long."
+            errors['pword_length'] = "Password must be at least 8 characters long."
         if postData['pword'] != postData['pwconf']:
-			errors['pwconf'] = "Passwords must match."
+            errors['pwconf'] = "Passwords must match."
         return errors
 
     def basic_validator_login(self, postData):
